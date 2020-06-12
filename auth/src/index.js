@@ -39,34 +39,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-require("express-async-errors");
-var body_parser_1 = require("body-parser");
 var mongoose_1 = __importDefault(require("mongoose"));
-var cookie_session_1 = __importDefault(require("cookie-session"));
-var current_user_1 = require("./routes/current-user");
-var signup_1 = require("./routes/signup");
-var signin_1 = require("./routes/signin");
-var signout_1 = require("./routes/signout");
-var error_handler_middleware_1 = require("./middlewares/error-handler.middleware");
-var not_found_error_1 = require("./errors/not-found.error");
-var app = express_1.default();
-app.set('trust proxy', true);
-app.use(body_parser_1.json());
-app.use(cookie_session_1.default({
-    signed: false,
-    secure: true // Must be on https connection,
-}));
-app.use(current_user_1.currentUserRouter);
-app.use(signup_1.signUpRouter);
-app.use(signin_1.signInRouter);
-app.use(signout_1.signOutRouter);
-app.all('*', function () { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        throw new not_found_error_1.NotFoundError();
-    });
-}); });
-app.use(error_handler_middleware_1.errorHandler);
+var app_1 = require("./app");
 var start = function () { return __awaiter(void 0, void 0, void 0, function () {
     var err_1;
     return __generator(this, function (_a) {
@@ -92,7 +66,7 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
                 console.log('error', err_1);
                 return [3 /*break*/, 4];
             case 4:
-                app.listen(3000, function () {
+                app_1.app.listen(3000, function () {
                     console.log('listening on port 3000');
                 });
                 return [2 /*return*/];

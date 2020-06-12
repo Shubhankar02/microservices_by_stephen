@@ -9,5 +9,5 @@ var router = express_1.default.Router();
 exports.signOutRouter = router;
 router.post('/api/users/sign-out', function (req, res) {
     req.session = null;
-    res.send({});
+    res.status(200).send({});
 });

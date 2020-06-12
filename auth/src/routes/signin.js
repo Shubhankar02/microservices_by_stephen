@@ -84,7 +84,7 @@ router.post('/api/users/sign-in', [
                 req.session = {
                     jwt: userJwt
                 };
-                return [2 /*return*/, res.status(201).send(existingUser)];
+                return [2 /*return*/, res.status(200).send(existingUser)];
         }
     });
 }); });
